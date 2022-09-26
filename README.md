@@ -1,6 +1,6 @@
 # PyFSTL
 
-Implementation of STL in Python. Not all functions/structures are implemented, that's why call it FSTL (Fake STL).
+A mini implementation of STL in Python. All data structures and algorithms are implemented in Python.
 
 Reference:
 
