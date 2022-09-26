@@ -50,13 +50,14 @@ class vector:
     def find(self, e,low=None,high=None):
         pass
     
-    # search e from the vector, assume vector is ordered (find doesn't assume so)
-    def search(self,e,low=None,high=None):
+    # search e using binary search
+    def bin_search(self,e,low=None,high=None):
         pass
     
-    # search e using binary search
-    def bin_search(self,e,low,high):
-        pass
+    # search e from the vector, assume vector is ordered (find doesn't assume so)
+    def search(self,e,func="bin_search",low=None,high=None):
+        if func=="bin_search":
+            return self.bin_search(e,low,high)
     
     # exchange elements
     def bubble(self,low=None,high=None):
@@ -75,7 +76,7 @@ class vector:
         pass
     
     # merge, used for merge sort
-    def merge(self,low=None,mid=None,high=None):
+    def merge(self,low,mid,high):
         pass
     
     # merge sort
@@ -112,13 +113,22 @@ class vector:
         pass
     
     # insert element e at the tail of the vector
-    def append(self,r):
-        pass
+    def append(self,e):
+        self.insert(self.length,e)
     
     # sort elements in [low,high)
     # if don't specify low and high, sort the whole vector
-    def sort(self,low=None,high=None):
-        pass
+    def sort(self,func="quick",low=None,high=None):
+        if func=="bubble":
+            return self.bubble_sort(low,high)
+        elif func=="selection":
+            return self.selection_sort(low,high)
+        elif func=="merge":
+            return self.merge_sort(low,high)
+        elif func=="heap":
+            return self.heap_sort(low,high)
+        elif func=="quick":
+            return self.quick_sort(low,high)
     
     # unsort elements in [low,high) by permuting
     # if don't specify low and high, unsort the whole vector

@@ -176,8 +176,66 @@ def bin_search(self,e,low=None,high=None):
 # bind to vector
 vector.bin_search=bin_search
 
+# implement bubble sort
+def bubble_sort(self,low=None,high=None):
+    if low==None and high==None:
+        low=0
+        high=self.length
+    for i in range(low,high):
+        for j in range(low,high-i-1):
+            if self.elements[j]>self.elements[j+1]:
+                self.elements[j],self.elements[j+1]=swap(self.elements[j],self.elements[j+1])
+# bind to vector
+vector.bubble_sort=bubble_sort
+
+#implement merge
+# assume v[low:mid] and v[mid:high] are sorted, now merge them together
+def merge(self,low,mid,high):
+    # copy the 1st part, 2nd part doesn't need to copy in the algorithm
+    # save space complexity
+    temp_copy=self.elements[low:mid].copy()
     
+    i=0
+    j=0
+    k=0
+    while (j<mid-low or k<high-mid):
+        if j<mid-low and (k==high-mid or temp_copy[j]<=self.elements[mid+k]):
+            self.elements[low+i]=temp_copy[j]
+            i+=1
+            j+=1
+        if k<high-mid and (j==mid-low or self.elements[mid+k]<temp_copy[j]):
+            self.elements[low+i]=self.elements[mid+k]
+            i+=1
+            k+=1
+# bind to vector
+vector.merge=merge
 
-
+# implement merge sort
+def merge_sort(self,low=None,high=None):
+    if low==None and high==None:
+        low=0
+        high=v.length
+    if high-low<2:
+        return
+    mid=int((low+high)/2)
+    self.merge_sort(low,mid)
+    self.merge_sort(mid,high)
+    self.merge(low,mid,high)
+# bind to vector
+vector.merge_sort=merge_sort   
+    
+# return maximum
+def maximum(self,low=None,high=None):
+    if low==None and high==None:
+        low=0
+        high=self.length
+    output=self.elements[0]
+    for i in range(0,self.length):
+        if self.elements[i]>output:
+            output=self.elements[i]
+    return output
+#bind to vector
+vector.maximum=maximum
+    
 #test code
-v=vector([1,2,3,4,5])
+v=vector([random.randint(0,100) for i in range(0,11)])
