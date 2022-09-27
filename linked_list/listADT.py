@@ -10,29 +10,80 @@ class list_node:
         self.data=data
         self.pred=pred
         self.succ=succ
-    def insert_as_pred(self,data):
+    def insert_as_pred(self,e):
         pass
-    def insert_as_succ(self,data):
+    def insert_as_succ(self,e): 
         pass
     
 class linked_list:
-    def __init__(self):
-        header=list_node()
-        trailer=list_node()
-        header.succ=trailer
-        header.pred=None
-        trailer.pred=header
-        trailer.succ=None
-        self.size=0
+    #initialize the list with an array elements
+    def __init__(self,elements=None):
+        if elements==None:
+            self.header=list_node()
+            self.trailer=list_node()
+            self.header.succ=self.trailer
+            self.header.pred=None
+            self.trailer.pred=self.header
+            self.trailer.succ=None
+            self.size=0
+        else:
+            # avoid using insert as last
+            self.header=list_node()
+            self.trailer=list_node()
+            self.header.pred=None
+            self.header.succ=self.trailer
+            self.trailer.succ=None
+            self.trailer.pred=self.header
+            self.size=0
+            for i in range(0,len(elements)):
+                self.size=self.size+1
+                self.trailer.insert_as_pred(elements[i])
+            
         
     def __getitem__(self,key):
-        pass
+        p=self.first()
+        while key>0:
+            p=p.succ
+            key=key-1
+        return p.data
     
+    def __setitem__(self,key,value):
+        p=self.first()
+        while key>0:
+            p=p.succ
+            key=key-1
+        p.data=value
+    
+    def __len__(self):
+        return self.size
+    
+    def __repr__(self):
+        string=[]
+        p=self.first()
+        while p.succ!=None:
+            string=[string]+[p.data]
+            p=p.succ
+        string=[string]
+        #print(string)
+        return str(string)
+    
+    # copy a linked list
+    # from node to its n-1 th pred
+    def copy(self,node=None,n=None):
+        return self.copy_nodes(node=self.first(),n=self.size)
+    
+    # remove a node
+    # return the removed value
+    def remove(self,node):
+        pass
+        
     # remove all nodes
+    # return number of nodes removed
     def clear(self):
         pass
     
-    # copy n nodes starting from node
+    # copy n nodes starting from node to its n-1 succ
+    # return a list consisting of these nodes
     def copy_nodes(self,node,n):
         pass
     
@@ -61,48 +112,78 @@ class linked_list:
         pass
     
     # find data from linked list
+    # from node to its n th pred
     # assume disordered
-    def find(self,data):
+    def find(self,e,n=None,node=None):
         pass
     
-    # search data from linked list
+    # search e and return the node <=e with largest rank
+    # search e from n pred starting from node (from back to front)
     # assume ordered
     # if n and node are none, search from the whole list
-    def search(self,data,n=None,node=None):
+    def search(self,e,n=None,node=None):
         pass
     
     # find the largest among node and its n-1 successors
     # if node and n None, search from whole list
     def select_max(self,node=None,n=None):
+        if n==None and node==None:
+            n=self.size
+            node=self.header.succ
+        p=node
+        maximum=node
+        for r in range(0,n):
+            if maximum.data<p.data:
+                maximum=p
+            p=p.succ
+        return maximum
+    
+    def insert_as_first(self,e):
         pass
     
-    def insert_as_first(self,data):
-        pass
-    
-    def insert_as_last(self,data):
+    def insert_as_last(self,e):
         pass
     
     # insert e as the successor of node
-    def insert_succ(self,node,data):
+    def insert_succ(self,node,e):
         pass
     
     # insert e as the pred of node
-    def insert_pred(self,node,data):
+    def insert_pred(self,node,e):
         pass
     
     # remove a node
     def remove(self,node):
         pass
     
+    # selection sort
+    # sort n values starting from node
+    def selection_sort(self,node=None,n=None):
+        pass
+    
+    
+    
+    # insertion sort
+    # sort n values starting from node
+    def insertion_sort(self,node=None,n=None):
+        pass
+    
+    # merge sort
+    # sort n values starting from node
+    def merge_sort(self,node=None,n=None):
+        pass
+    
     #sort
-    def sort(self,node=None,n=None):
+    def sort(self,func='selection',node=None,n=None):
         pass
     
     #deduplicate
+    # remove number of elements removed
     def deduplicate(self):
         pass
     
     # uniquify
+    # return number of elements removed
     def uniquify(self):
         pass
     
