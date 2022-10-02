@@ -7,6 +7,7 @@ Created on Tue Sep 27 20:37:27 2022
 
 from listADT import*
 import random
+from vector import*
 
 # implement find()
 def find(self,e,n=None,node=None):
@@ -212,9 +213,54 @@ def selection_sort(self,node=None,n=None):
 # bind to linked list
 linked_list.selection_sort=selection_sort
 
-# test code
-elements=[random.randint(0,100) for i in range(0,10)]
-l=linked_list(elements)
+# implement merge()
+def merge(self,p,n,q,m):
+    
+    
+    pp=p.pred
+    qq=q.pred
+    while m>0:
+        if n>0 and p.data<=q.data:
+            p=p.succ
+            if q==p:
+                break
+            n=n-1
+        else:
+            m=m-1
+            # can't change the relative position of p and q! (i.e. can't add new pred of p and q)
+            # otherwise, the upper level p and q will also be changed
+            p.data,q.data=swap(p.data,q.data)
+            tmp=q.data
+            q=q.succ
+            self.remove(q.pred)
+            self.insert_succ(p,tmp)
+            p=p.succ
+            
+    p=pp.succ
+# bind to linked list
+linked_list.merge=merge
+
+
+# implement merge sort
+def merge_sort(self,node=None,n=None):
+    if node==None and n==None:
+        node=self.header.succ
+        n=self.size
+    if n<2:
+        return 
+    p=node
+    m=int(n/2)
+    q=p
+    for i in range(0,m):
+        q=q.succ
+    
+    self.merge_sort(p,m)
+    self.merge_sort(q,n-m)
+    self.merge(p,m,q,n-m)
+# bind to linked list
+linked_list.merge_sort=merge_sort
+
+
 
 
     
