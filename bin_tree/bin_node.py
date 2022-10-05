@@ -71,7 +71,19 @@ class bin_node:
     
     # return number of all offsprings
     def size(self):
-        pass
+        x=self.lc
+        y=self.rc
+        # x and y are not null
+        if x and y:
+            return 1+x.size()+y.size()
+        # x not null, y null
+        if x and not y:
+            return 1+x.size()
+        # x null, y not null
+        if not x and y:
+            return 1+y.size()
+        else:
+            return 1
     
     # insert as left children, return the new children
     def insert_as_lc(self,e):

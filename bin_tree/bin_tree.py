@@ -4,8 +4,10 @@ Created on Sun Oct  2 22:22:25 2022
 
 @author: lidon
 """
-
+from queues import*
 from bin_node import*
+
+
 
 class bin_tree:
     # size: tree size
@@ -117,17 +119,45 @@ class bin_tree:
             self.size=self.size-new_tree.size
             return new_tree
     
-    def trav_level(self,func):
-        pass
+    # traverse by level
+    # x a node in tree
+    def trav_level(self,x,func):
+        Q=queue([])
+        Q.enqueue(x)
+        while len(Q)!=0:
+            node_now=Q.dequeue()
+            func(node_now.data)
+            if has_lc(node_now):
+                Q.enqueue(node_now.lc)
+            if has_rc(node_now):
+                Q.enqueue(node_now.rc)
+
+    # preorder traverse
+    # x is a node in the tree
+    def trav_pre(self,x,func):
+        if not x:
+            return
+        func(x.data)
+        self.trav_pre(x.lc,func)
+        self.trav_pre(x.rc,func)
     
-    def trav_pre(self,func):
-        pass
+    # in order traverse
+    # x is a node in the tree
+    def trav_in(self,x,func):
+        if not x:
+            return
+        self.trav_in(x.lc,func)
+        func(x.data)
+        self.trav_in(x.rc,func)
     
-    def trav_in(self,func):
-        pass
-    
-    def trav_post(self,func):
-        pass
+    # traverse in post order
+    # x a node in the tree
+    def trav_post(self,x,func):
+        if not x:
+            return
+        self.trav_post(x.lc,func)
+        self.trav_post(x.rc,func)
+        func(x.data)
     
     # reload <=
     def __le__(self,other):
@@ -137,6 +167,9 @@ class bin_tree:
     def __eq__(self,other):
         return self.root and other.root and self.root==other.root
     
-    
-    
-    
+
+# sample
+t=bin_tree()
+t.insert_as_root(3)
+t.insert_as_lc(t.root,4)
+t.insert_as_rc(t.root,5)
