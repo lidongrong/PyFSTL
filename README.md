@@ -1,6 +1,6 @@
-# PyFSTL
+# PyMSTL
 
-A mini implementation of STL in Python. All data structures and algorithms are implemented in Python.
+Implementation of a mini-STL in Python. All data structures and algorithms are implemented in Python.
 
 Reference:
 
