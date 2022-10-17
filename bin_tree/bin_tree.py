@@ -159,6 +159,8 @@ class bin_tree:
         self.trav_post(x.rc,func)
         func(x.data)
     
+    
+    
     # reload <=
     def __le__(self,other):
         return self.root and  other.root and self.root<=other.root

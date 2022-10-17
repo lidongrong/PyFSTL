@@ -49,7 +49,15 @@ def uncle(x):
         return x.par.par.rc
     else:
         return x.par.par.lc
-
+# return pointer from its parent
+def from_par_to(x):
+    if is_root(x):
+        return x
+    else:
+        if is_lc(x):
+            return x.par.lc
+        else:
+            return x.par.rc
 
 
 
@@ -97,8 +105,19 @@ class bin_node:
         self.rc=child
         return child
     
-    def succ():
-        pass
+    # successor in trave in
+    def succ(self):
+        s=self
+        if self.rc:
+            s=self.rc
+            while has_lc(s):
+                s=s.lc
+        else:
+            while is_rc(s):
+                s=s.par
+            s=s.par
+        return s
+        
     
     # traverse wrt level
     def trav_level(self,func):
