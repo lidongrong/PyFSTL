@@ -166,6 +166,26 @@ class hash_table:
             if old_ht[r]:
                 self.put(old_ht[r].key,old_ht[r].value)
 
+
+    # reload the [] operator
+    # Allow user to visit directly by ht['Harry']
+    def __getitem__(self,key):
+        return self.get(key)
+    
+    # support directly setting an pair by the syntax
+    # ht['Harry']='Potter'
+    def __setitem__(self,key,value):
+        self.put(key,value)
+        
+    # representation
+    def __repr__(self):
+        v=vector([])
+        for i in range(0,self.M):
+            if self.ht[i]:
+                v.append(self.ht[i])
+        return v.__repr__()
+    
+    
 # implement bucket sort via hash table
 # v is the input vector
 def bucket_sort(v):
@@ -183,12 +203,3 @@ def bucket_sort(v):
             v1.append(int_table.ht[j].value)
     return v1
 
-# test code
-h=hash_table()
-h.put('Frodo','Baggins')
-h.put('Gandalf','The Grey')
-h.put('Annatar','Master of Gift')     
-
-
-v=vector([3,1,4,7,2])
-v1=bucket_sort(v)
