@@ -8,8 +8,36 @@ Created on Sat Oct  1 21:10:02 2022
 from vector import*
 from linked_list import*
 from stack import*
+from hash_table import*
 
-# implement some algorithms based on data structures we have implemented
+# implement some useful algorithms based on data structures we have implemented
+
+
+# sort a vector
+# input should be a list/vector object
+# will return a new vector
+# method specifies the way to sort
+# supporting methods: merge, bubble, selection, quick, bucket
+def sort(v,method='merge'):
+    v=vector(v)
+    u=v.copy()
+    if method=='merge':
+        u.merge_sort()
+        return u
+    elif method=='bubble':
+        u.bubble_sort()
+        return u
+    elif method=='selection':
+        u.selection_sort()
+        return u
+    elif method=='quick':
+        u.quick_sort()
+        return u
+    elif method=='bucket':
+        return bucket_sort(u)
+    
+
+
 
 
 # some additional algorithms implemented by stack
@@ -113,7 +141,8 @@ def place_queen(n):
             q.y=q.y+1
             q.x=0
     return solution
-        
+
+     
         
         
             
