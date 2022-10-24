@@ -77,6 +77,9 @@ class bin_node:
         self.height=height
         self.color=color
     
+    def __repr__(self):
+        return str(self.data)
+    
     # return number of all offsprings
     def size(self):
         x=self.lc

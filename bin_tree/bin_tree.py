@@ -15,7 +15,25 @@ class bin_tree:
     def __init__(self,size=0,root=None):
         self.size=size
         self.root=root
-        
+    
+    # print the subtree start from x
+    # this function should be hidden from the user
+    def print_tree(self,x):
+        rep=vector([])
+        rep.append(x.data)
+        if x.lc:
+            rep.append(self.print_tree(x.lc))
+        if x.rc:
+            rep.append(self.print_tree(x.rc))
+        return rep
+    
+    # print the tree
+    def __repr__(self):
+        if not self.root:
+            return str(vector([]))
+        rep=self.print_tree(self.root)
+        return str(rep)
+    
     # update the height of node x
     # return the updated height
     def update_height(self,x):
@@ -170,8 +188,3 @@ class bin_tree:
         return self.root and other.root and self.root==other.root
     
 
-# sample
-t=bin_tree()
-t.insert_as_root(3)
-t.insert_as_lc(t.root,4)
-t.insert_as_rc(t.root,5)
