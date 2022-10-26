@@ -5,11 +5,11 @@ Created on Sat Oct  1 21:10:02 2022
 @author: lidon
 """
 
-from vector import*
-from linked_list import*
-from stack import*
-from hash_table import*
-
+from .vector import*
+from .linked_list import*
+from .stack import*
+from .hash_table import*
+from .priority_queue import*
 # implement some useful algorithms based on data structures we have implemented
 
 
@@ -35,7 +35,8 @@ def sort(v,method='merge'):
         return u
     elif method=='bucket':
         return bucket_sort(u)
-    
+    elif method=='heap':
+        return heap_sort(u)
 
 
 
