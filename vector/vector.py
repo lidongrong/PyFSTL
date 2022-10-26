@@ -5,7 +5,7 @@ Created on Sun Sep 25 16:08:05 2022
 @author: lidon
 """
 import random
-from vectorADT import*
+from .vectorADT import*
 
 
 
@@ -214,7 +214,7 @@ vector.merge=merge
 def merge_sort(self,low=None,high=None):
     if low==None and high==None:
         low=0
-        high=v.length
+        high=self.length
     if high-low<2:
         return
     mid=int((low+high)/2)
@@ -223,7 +223,10 @@ def merge_sort(self,low=None,high=None):
     self.merge(low,mid,high)
 # bind to vector
 vector.merge_sort=merge_sort   
-    
+
+
+
+ 
 # return maximum
 def maximum(self,low=None,high=None):
     if low==None and high==None:
@@ -237,5 +240,3 @@ def maximum(self,low=None,high=None):
 #bind to vector
 vector.maximum=maximum
     
-#test code
-v=vector([random.randint(0,100) for i in range(0,11)])

@@ -9,9 +9,11 @@ Created on Sun Sep 25 11:29:16 2022
 
 class vector:
     # arr should be a python list 
-    def __init__(self,arr):
+    def __init__(self,arr=None):
         self.elements=arr
-        self.length=len(arr)
+        self.length=0
+        if arr:
+            self.length=len(arr)
     
     # reload the [] operator
     def __getitem__(self,key):
@@ -39,7 +41,7 @@ class vector:
     
     # return if the vector is empty
     def empty(self):
-        pass
+        return not self.length>0
     
     # return if the vector is in order
     # return total number of disordered pairs
@@ -114,7 +116,8 @@ class vector:
     
     # insert element e at the tail of the vector
     def append(self,e):
-        self.insert(self.length,e)
+        index=self.insert(self.length,e)
+        return index
     
     # sort elements in [low,high)
     # if don't specify low and high, sort the whole vector
