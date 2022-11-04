@@ -1,4 +1,4 @@
-# PyMSTL
+# craftlib
 
 Implementation of a mini-STL in Python. All data structures and algorithms are implemented in Python.
 
